@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "zendao command line client",
   "bin": {
-    "xhzd": "out/run.js"
+    "zd-cli": "out/run.js"
   },
   "license": "MIT",
   "scripts": {
