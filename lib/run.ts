@@ -11,10 +11,11 @@ const run = async () => {
   p.version('1.0.0')
     .usage('cmd\n E.g. zendao-cli -u username -p password url\n')
     .option("-u,--user <username>","username to login")
-    .option("-p,--password <password>","password to login");
+    .option("-p,--password <password>","password to login")
+    .option("-b,--buglist","show list of bugs");
   p.parse(process.argv);
-  console.log(p.user+"\n");
-  console.log(p.password+"\n");
+  //console.log(p.user+"\n");
+  //console.log(p.password+"\n");
 
   const browser = await puppeteer.launch(config.puppeteer);
   const page = await browser.newPage();
@@ -28,7 +29,13 @@ const run = async () => {
   await page.click("#submit");
 
   await page.waitForNavigation({ waitUntil: 'networkidle2' });
-  const output = await page.$eval('#userMenu > a',e => e.innerText);
+  var output = await page.$eval('#userMenu > a',e => e.innerText);
+
+  if(p.buglist){
+    await page.goto("http://172.16.7.167/zentao/bug-browse-1-0-assigntome-0.html");
+    output = await page.$eval('#bugList > tbody', e => e.innerText );
+    console.log(output);
+  }
   //console.log('ouput:%j',output);
 
   //await page.screenshot({ path: './dev-images/xhzd.png' });
