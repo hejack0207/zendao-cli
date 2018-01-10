@@ -33,8 +33,8 @@ const run = async () => {
   var output = await page.$eval('#userMenu > a',e => e.textContent);
 
   if(p.buglist){
-    await page.goto(prefix+"/bug-browse-1-0-assigntome-0.html");
-    output = await page.$eval('#bugList > tbody', e => e.textContent);
+    await page.goto(prefix+"/bug-browse.html");
+    output = await page.$eval('#bugList > tbody', e => e.outerHTML);
     console.log(output);
   }
   //console.log('ouput:%j',output);
