@@ -34,7 +34,7 @@ const run = async () => {
 
   if(p.buglist){
     await page.goto(prefix+"/bug-browse.html");
-    output = await page.$eval('#bugList > tbody', e => e.outerHTML);
+    output = await page.$eval('#bugList', e => e.outerHTML);
     console.log(output);
   }
   //console.log('ouput:%j',output);
